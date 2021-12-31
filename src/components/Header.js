@@ -1,7 +1,15 @@
 import styled from "styled-components";
 import {Link} from 'react-router-dom';
+import {auth, provider} from "../firebase";
 
 const Header = () => {
+
+    const handleAuth = () => {
+        auth.signInWithPopup(provider).then((res)=>{
+            console.log(res);
+        }).catch(err => err.message);
+    }
+
     return (
         <Nav>
             <Logo>
@@ -33,7 +41,7 @@ const Header = () => {
                     <span>SERIES</span>
                 </Link>
             </NavMenu>
-            <Link to="/login" className="login">
+            <Link to="/login" className="login" onClick={handleAuth}>
                 LOGIN
             </Link>
         </Nav>
